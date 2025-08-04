@@ -1,9 +1,17 @@
 // https://pikuma.com/blog/isometric-projection-in-games
 
+// https://yqnn.github.io/svg-path-editor/ trace out
+
 import initDrawCourse from "./circle";
 
 const canvas = document.getElementById("app") as HTMLCanvasElement;
 const ctx = canvas.getContext("2d") as CanvasRenderingContext2D;
+const offscreenCanvas = document.getElementById(
+  "offscreen"
+) as HTMLCanvasElement;
+const offscreenCtx = offscreenCanvas.getContext(
+  "2d"
+) as CanvasRenderingContext2D;
 
 const canvasWidth = canvas.width;
 const canvasHeight = canvas.height;
@@ -35,16 +43,58 @@ function drawSpot(x: number, y: number, isCourse: boolean) {
   ctx.fill();
 }
 
-const { getImageData } = initDrawCourse();
+// const { getImageData } = initDrawCourse();
+const getImageData = (x: number, y: number) => {
+  const myImageData = offscreenCtx.getImageData(x, y, 24, 24);
+
+  const colorData = myImageData.data;
+  const colors = Array(24 * 24)
+    .fill(0)
+    .map((_, i) => {
+      return colorData[i * 4 + 3] > 0 ? 1 : 0;
+    });
+
+  return colors;
+};
 
 const gap = 4;
 let sizeW = xStart + (23 + 23) * width * 2;
 let sizeH = yStart + (0 - 23) * height;
 console.log(sizeW, sizeH);
 
-const draw = (yCounterOffset: number) => {
+const courseimg = new Image();
+courseimg.crossOrigin = "anonymous";
+courseimg.src = "./src/courses/shootinghoops.svg";
+
+let pointX = 0;
+let pointY = 0;
+courseimg.onload = () => {
+  offscreenCtx.drawImage(courseimg, 0, 0);
+
+  // https://developer.mozilla.org/en-US/docs/Web/API/SVGGeometryElement
+  const path = document.getElementById("svg") as unknown as SVGPathElement;
+  const pathLength = path.getTotalLength();
+  const interval = pathLength / 100;
+  let progress = 0;
+  // increment interval * 1,2,3 etc <= 100
+  setInterval(() => {
+    if (progress < pathLength) {
+      progress += interval;
+    } else {
+      progress = 0;
+    }
+    const points = path.getPointAtLength(progress);
+    pointX = points.x - 12;
+    pointY = points.y - 12;
+    draw(pointX, pointY);
+  }, 140);
+};
+
+console.log(document.getElementById("svg"));
+
+const draw = (x: number, y: number) => {
   ctx.clearRect(0, 0, canvas.width, canvas.height);
-  const colors = getImageData(0, yCounterOffset);
+  const colors = getImageData(x, y);
   for (let indexX = 0; indexX < gridSize; indexX++) {
     for (let indexY = 0; indexY < gridSize; indexY++) {
       let isCourse = false;
@@ -67,5 +117,4 @@ let counter = 0;
 //   }
 //   draw(counter);
 // }, 100);
-
-draw(0);
+console.log(pointX, pointY);
