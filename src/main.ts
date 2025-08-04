@@ -69,8 +69,6 @@ courseimg.src = "./src/courses/shootinghoops.svg";
 let pointX = 0;
 let pointY = 0;
 courseimg.onload = () => {
-  offscreenCtx.drawImage(courseimg, 0, 0);
-
   // https://developer.mozilla.org/en-US/docs/Web/API/SVGGeometryElement
   const path = document.getElementById("svg") as unknown as SVGPathElement;
   const pathLength = path.getTotalLength();
@@ -78,6 +76,8 @@ courseimg.onload = () => {
   let progress = 0;
   // increment interval * 1,2,3 etc <= 100
   setInterval(() => {
+    offscreenCtx.clearRect(0, 0, offscreenCanvas.width, offscreenCanvas.height);
+    offscreenCtx.drawImage(courseimg, 0, 0);
     if (progress < pathLength) {
       progress += interval;
     } else {
@@ -87,10 +87,12 @@ courseimg.onload = () => {
     pointX = points.x - 12;
     pointY = points.y - 12;
     draw(pointX, pointY);
+    offscreenCtx.beginPath();
+    offscreenCtx.arc(pointX + 12, pointY + 12, 4, 0, Math.PI * 2);
+    offscreenCtx.fill();
+    offscreenCtx.stroke();
   }, 140);
 };
-
-console.log(document.getElementById("svg"));
 
 const draw = (x: number, y: number) => {
   ctx.clearRect(0, 0, canvas.width, canvas.height);
@@ -107,14 +109,3 @@ const draw = (x: number, y: number) => {
     }
   }
 };
-
-let counter = 0;
-// setInterval(() => {
-//   if (counter < 48) {
-//     counter++;
-//   } else {
-//     counter = 0;
-//   }
-//   draw(counter);
-// }, 100);
-console.log(pointX, pointY);
