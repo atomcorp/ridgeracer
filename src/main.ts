@@ -13,6 +13,8 @@ const offscreenCtx = offscreenCanvas.getContext(
   "2d"
 ) as CanvasRenderingContext2D;
 
+const svgId = "01helterskelter";
+
 const canvasWidth = canvas.width;
 const canvasHeight = canvas.height;
 
@@ -64,13 +66,13 @@ console.log(sizeW, sizeH);
 
 const courseimg = new Image();
 courseimg.crossOrigin = "anonymous";
-courseimg.src = "./src/courses/shootinghoops.svg";
+courseimg.src = `./src/courses/${svgId}.svg`;
 
 let pointX = 0;
 let pointY = 0;
 courseimg.onload = () => {
   // https://developer.mozilla.org/en-US/docs/Web/API/SVGGeometryElement
-  const path = document.getElementById("svg") as unknown as SVGPathElement;
+  const path = document.getElementById(svgId) as unknown as SVGPathElement;
   const pathLength = path.getTotalLength();
   const interval = pathLength / 100;
   let progress = 0;
@@ -78,13 +80,14 @@ courseimg.onload = () => {
   setInterval(() => {
     offscreenCtx.clearRect(0, 0, offscreenCanvas.width, offscreenCanvas.height);
     offscreenCtx.drawImage(courseimg, 0, 0);
+
     if (progress < pathLength) {
       progress += interval;
     } else {
       progress = 0;
     }
     const points = path.getPointAtLength(progress);
-    pointX = points.x - 12;
+    pointX = points.x - 21 - 12;
     pointY = points.y - 12;
     draw(pointX, pointY);
     offscreenCtx.beginPath();
@@ -108,4 +111,9 @@ const draw = (x: number, y: number) => {
       drawSpot(indexX, indexY, isCourse);
     }
   }
+  ctx.beginPath();
+  ctx.drawImage(courseimg, 0, 0, 128 * 2, 128 * 2);
+  ctx.arc((x + 12) * 2, (y + 12) * 2, 4, 0, Math.PI * 2);
+  ctx.fill();
+  ctx.stroke();
 };
