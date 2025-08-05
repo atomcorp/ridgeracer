@@ -87,14 +87,14 @@ courseimg.onload = () => {
       progress = 0;
     }
     const points = path.getPointAtLength(progress);
-    pointX = points.x - 21 - 12;
+    pointX = points.x - 12;
     pointY = points.y - 12;
     draw(pointX, pointY);
     offscreenCtx.beginPath();
     offscreenCtx.arc(pointX + 12, pointY + 12, 4, 0, Math.PI * 2);
     offscreenCtx.fill();
     offscreenCtx.stroke();
-  }, 140);
+  }, 160);
 };
 
 const draw = (x: number, y: number) => {
