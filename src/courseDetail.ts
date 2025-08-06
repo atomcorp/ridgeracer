@@ -1,6 +1,13 @@
 import { gridSize } from "./main";
 
-const setCourseDetail = (canvas: HTMLCanvasElement) => {
+/**
+ *
+ * this should just be a drawing function
+ * draw the grid
+ *
+ *
+ */
+const setCircuitPointDraw = (canvas: HTMLCanvasElement) => {
   const ctx = canvas.getContext("2d") as CanvasRenderingContext2D;
 
   const pixelWidth =
@@ -30,7 +37,7 @@ const setCourseDetail = (canvas: HTMLCanvasElement) => {
     ctx.fill();
   };
 
-  const draw = (colors: (0 | 1)[]) => {
+  const drawCircuitPoint = (colors: (0 | 1)[]) => {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     // const colors = getImageData(x, y);
     for (let indexX = 0; indexX < gridSize; indexX++) {
@@ -47,7 +54,7 @@ const setCourseDetail = (canvas: HTMLCanvasElement) => {
     }
   };
 
-  return { draw };
+  return { drawCircuitPoint };
 };
 
-export { setCourseDetail };
+export { setCircuitPointDraw };

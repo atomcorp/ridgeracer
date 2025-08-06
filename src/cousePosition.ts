@@ -1,5 +1,9 @@
-const svgId = "01helterskelter";
+import imgSrc from "./courses/01helterskelter.svg";
+import imgCode from "./courses/01helterskelter.svg?raw";
 
+const svgDomElement = document.createElement("template");
+svgDomElement.innerHTML = imgCode;
+console.log(svgDomElement.content);
 export const getCoursePosition = (
   callback: (x: number, y: number, imgData: (0 | 1)[]) => void
 ) => {
@@ -23,22 +27,22 @@ export const getCoursePosition = (
 
   const courseimg = new Image();
   courseimg.crossOrigin = "anonymous";
-  courseimg.src = `./src/courses/${svgId}.svg`;
+  courseimg.src = imgSrc;
   courseimg.onload = () => {
     // https://developer.mozilla.org/en-US/docs/Web/API/SVGGeometryElement
-    const path = document.getElementById(svgId) as unknown as SVGPathElement;
+    const path = svgDomElement.content.querySelector("path") as SVGPathElement;
     const pathLength = path.getTotalLength();
     const interval = pathLength / 100;
     let progress = 0;
     // increment interval * 1,2,3 etc <= 100
+    offscreenCtx.drawImage(courseimg, 0, 0);
     setInterval(() => {
-      offscreenCtx.clearRect(
-        0,
-        0,
-        offscreenCanvas.width,
-        offscreenCanvas.height
-      );
-      offscreenCtx.drawImage(courseimg, 0, 0);
+      // offscreenCtx.clearRect(
+      //   0,
+      //   0,
+      //   offscreenCanvas.width,
+      //   offscreenCanvas.height
+      // );
 
       if (progress < pathLength) {
         progress += interval;

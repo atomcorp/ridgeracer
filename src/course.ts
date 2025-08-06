@@ -1,4 +1,7 @@
-const courseId = "01helterskelter";
+import imgCode from "./courses/01helterskelter.svg?raw";
+
+const svgDomElement = document.createElement("template");
+svgDomElement.innerHTML = imgCode;
 
 export const drawCourse = (
   ctx: CanvasRenderingContext2D,
@@ -11,9 +14,7 @@ export const drawCourse = (
     "2d"
   ) as OffscreenCanvasRenderingContext2D;
 
-  const svgPath = document.getElementById(
-    courseId
-  ) as unknown as SVGPathElement;
+  const svgPath = svgDomElement.content.querySelector("path") as SVGPathElement;
   const canvasPath = new Path2D(svgPath.getAttribute("d") as string);
   //   offscreenCtx.clearRect(0, 0, 512, 512);
   offscreenCtx.beginPath();
@@ -36,5 +37,5 @@ export const drawCourse = (
   offscreenCtx.stroke();
   offscreenCtx.scale(-4, -4);
 
-  return offscreenCanvas;
+  ctx.drawImage(offscreenCanvas, 0, 0);
 };
