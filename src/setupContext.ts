@@ -14,4 +14,5 @@ export function setupContext(canvas: HTMLCanvasElement) {
   // Scale all drawing operations by the dpr, so you
   // don't have to worry about the difference.
   ctx.scale(dpr, dpr);
+  return ctx;
 }

@@ -1,15 +1,6 @@
-import { gridSize } from "./main";
-
-/**
- *
- * this should just be a drawing function
- * draw the grid
- *
- *
- */
-const setCircuitPointDraw = (canvas: HTMLCanvasElement) => {
+export const setDrawCircuitPoint = (canvas: HTMLCanvasElement) => {
   const ctx = canvas.getContext("2d") as CanvasRenderingContext2D;
-
+  const gridSize = 24;
   const pixelWidth =
     canvas.width / ((gridSize - 0.5) * 4 * window.devicePixelRatio); // gridSize * 2 = amount of pixels horizontally in an isometric grid
 
@@ -56,5 +47,3 @@ const setCircuitPointDraw = (canvas: HTMLCanvasElement) => {
 
   return { drawCircuitPoint };
 };
-
-export { setCircuitPointDraw };
