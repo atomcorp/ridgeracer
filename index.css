@@ -1,0 +1,14 @@
+body {
+  --yellow: #febd02;
+  --coursecolor: #fd7712;
+  --default-pixel: #494b4f;
+  background-color: var(--yellow);
+  font-family: sans-serif;
+}
+
+#courses {
+  /* width: 100%; */
+  /* max-width: 600px; */
+  /* border: 1px solid white; */
+  /* display: none; */
+}
