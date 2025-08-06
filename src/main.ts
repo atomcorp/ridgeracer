@@ -1,4 +1,4 @@
-import { drawCourse } from "./drawCourse";
+import { setDrawCanvas } from "./setDrawCourse";
 import { setDrawCircuitPoint } from "./setDrawCircuitPoint";
 import { setupContext } from "./setupContext";
 import { setCircuitOffscreenCtx } from "./getCircuitOffscreenCtx";
@@ -8,23 +8,44 @@ const mainCanvas = document.getElementById("course") as HTMLCanvasElement;
 // generic - setup context (scale ctx, set canvas width/height)
 const mainCtx = setupContext(mainCanvas);
 
-const { getPointOfCircuit, circuitLength, pointLength } = setPointsOfCircuit();
-const { getCircuitPointImageData } = setCircuitOffscreenCtx();
-const { drawCircuitPoint } = setDrawCircuitPoint(mainCanvas);
+const runCircuitAnimation = (circuitName: string) => {
+  const { getPointOfCircuit, circuitLength, pointLength } =
+    setPointsOfCircuit(circuitName);
+  const { getCircuitPointImageData } = setCircuitOffscreenCtx(circuitName);
+  const { drawCircuitPoint } = setDrawCircuitPoint(mainCanvas);
+  const { drawCourse } = setDrawCanvas(circuitName, mainCtx);
 
-let currentCircuitPoint = 0;
+  let currentCircuitPoint = 0;
+  // todo: replace with requestanimationframe
+  const intervalId = setInterval(() => {
+    if (currentCircuitPoint < circuitLength) {
+      currentCircuitPoint += pointLength;
+    } else {
+      currentCircuitPoint = 0;
+    }
+    mainCtx.clearRect(0, 0, mainCanvas.width, mainCanvas.height);
 
-setInterval(() => {
-  if (currentCircuitPoint < circuitLength) {
-    currentCircuitPoint += pointLength;
-  } else {
-    currentCircuitPoint = 0;
+    const { x, y } = getPointOfCircuit(currentCircuitPoint);
+    const circuitPointImageData = getCircuitPointImageData(x, y);
+
+    drawCircuitPoint(circuitPointImageData);
+    drawCourse(x, y);
+  }, 160);
+
+  return () => {
+    clearInterval(intervalId);
+  };
+};
+
+let stopAnimation: () => void | undefined;
+
+document.addEventListener("click", (e) => {
+  const target = e.target as HTMLElement;
+  if (target.tagName === "BUTTON") {
+    if (stopAnimation) {
+      stopAnimation();
+    }
+    const circuitName = target.innerText || "01helterskelter";
+    stopAnimation = runCircuitAnimation(circuitName);
   }
-  const { x, y } = getPointOfCircuit(currentCircuitPoint);
-
-  const circuitPointImageData = getCircuitPointImageData(x, y);
-
-  mainCtx.clearRect(0, 0, mainCanvas.width, mainCanvas.height);
-  drawCircuitPoint(circuitPointImageData);
-  drawCourse(mainCtx, x, y);
-}, 160);
+});

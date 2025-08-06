@@ -1,8 +1,9 @@
-import svgCode from "./courses/01helterskelter.svg?raw"; // xml string
+import { getCircuit } from "./getCircuit";
 
-export const setPointsOfCircuit = () => {
+export const setPointsOfCircuit = (circuit: string) => {
+  const { raw } = getCircuit(circuit);
   const templateEl = document.createElement("template");
-  templateEl.innerHTML = svgCode;
+  templateEl.innerHTML = raw;
 
   const path = templateEl.content.querySelector("path") as SVGPathElement;
   const circuitLength = path.getTotalLength();

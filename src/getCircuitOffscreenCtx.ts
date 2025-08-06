@@ -1,20 +1,16 @@
-import svgCode from "./courses/01helterskelter.svg?raw"; // xml string
-import imgSrc from "./courses/01helterskelter.svg"; // data:image
+import { getCircuit } from "./getCircuit";
 
-/**
- * Create
- * @returns offscreenCtx
- */
-export const setCircuitOffscreenCtx = () => {
+export const setCircuitOffscreenCtx = (circuit: string) => {
+  const { raw, src } = getCircuit(circuit);
   const svgDomElement = document.createElement("template");
-  svgDomElement.innerHTML = svgCode;
+  svgDomElement.innerHTML = raw;
   const offscreenCanvas = new OffscreenCanvas(128, 128);
-  const offscreenCtx = offscreenCanvas.getContext(
-    "2d"
-  ) as OffscreenCanvasRenderingContext2D;
+  const offscreenCtx = offscreenCanvas.getContext("2d", {
+    willReadFrequently: true,
+  }) as OffscreenCanvasRenderingContext2D;
   const courseimg = new Image();
   courseimg.crossOrigin = "anonymous";
-  courseimg.src = imgSrc;
+  courseimg.src = src;
   courseimg.onload = () => {
     offscreenCtx.drawImage(courseimg, 0, 0);
   };

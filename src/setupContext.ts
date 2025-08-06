@@ -10,7 +10,9 @@ export function setupContext(canvas: HTMLCanvasElement) {
   // size * the device pixel ratio.
   canvas.width = rect.width * dpr;
   canvas.height = rect.height * dpr;
-  const ctx = canvas.getContext("2d") as CanvasRenderingContext2D;
+  const ctx = canvas.getContext("2d", {
+    willReadFrequently: true,
+  }) as CanvasRenderingContext2D;
   // Scale all drawing operations by the dpr, so you
   // don't have to worry about the difference.
   ctx.scale(dpr, dpr);
