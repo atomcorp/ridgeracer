@@ -13,6 +13,7 @@ export const setDrawCanvas = (
 
   const drawCourse = (x: number, y: number) => {
     const offscreenCanvas = new OffscreenCanvas(512, 512);
+
     const offscreenCtx = offscreenCanvas.getContext(
       "2d"
     ) as OffscreenCanvasRenderingContext2D;

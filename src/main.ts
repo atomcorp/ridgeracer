@@ -45,7 +45,12 @@ document.addEventListener("click", (e) => {
     if (stopAnimation) {
       stopAnimation();
     }
-    const circuitName = target.innerText || "01helterskelter";
+    //
+    if (target.innerText === "Stop") {
+      // mainCtx.clearRect(0, 0, mainCanvas.width, mainCanvas.height);
+      return;
+    }
+    const circuitName = target.innerText;
     stopAnimation = runCircuitAnimation(circuitName);
   }
 });
