@@ -2,7 +2,6 @@ import helterskelterSrc from "./circuits/01helterskelter.svg";
 import helterskelterRaw from "./circuits/01helterskelter.svg?raw";
 import wonderhillSrc from "./circuits/02wonderhill.svg";
 import wonderhillRaw from "./circuits/02wonderhill.svg?raw";
-
 import edgeoftheearthSrc from "./circuits/03edgeoftheearth.svg";
 import edgeoftheearthRaw from "./circuits/03edgeoftheearth.svg?raw";
 import outofblueSrc from "./circuits/04outofblue.svg";
@@ -13,7 +12,6 @@ import brightestniteSrc from "./circuits/06brightestnite.svg";
 import brightestniteRaw from "./circuits/06brightestnite.svg?raw";
 import heavenandhellSrc from "./circuits/07heavenandhell.svg";
 import heavenandhellRaw from "./circuits/07heavenandhell.svg?raw";
-
 import shootinghoopsSrc from "./circuits/08shootinghoops.svg";
 import shootinghoopsRaw from "./circuits/08shootinghoops.svg?raw";
 

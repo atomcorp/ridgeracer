@@ -4,7 +4,7 @@ import { setupContext } from "./setupContext";
 import { setCircuitOffscreenCtx } from "./getCircuitOffscreenCtx";
 import { setPointsOfCircuit } from "./setPointsOfCircuit";
 
-const mainCanvas = document.getElementById("course") as HTMLCanvasElement;
+const mainCanvas = document.getElementById("minimap") as HTMLCanvasElement;
 // generic - setup context (scale ctx, set canvas width/height)
 const mainCtx = setupContext(mainCanvas);
 
@@ -13,7 +13,7 @@ const runCircuitAnimation = (circuitName: string) => {
     setPointsOfCircuit(circuitName);
   const { getCircuitPointImageData } = setCircuitOffscreenCtx(circuitName);
   const { drawCircuitPoint } = setDrawCircuitPoint(mainCanvas);
-  const { drawCourse } = setDrawCanvas(circuitName, mainCtx);
+  const { drawCourse } = setDrawCanvas(circuitName, mainCtx, mainCanvas.width);
 
   let currentCircuitPoint = 0;
   // todo: replace with requestanimationframe
@@ -31,7 +31,6 @@ const runCircuitAnimation = (circuitName: string) => {
     drawCircuitPoint(circuitPointImageData);
     drawCourse(x, y);
   }, 160);
-
   return () => {
     clearInterval(intervalId);
   };
