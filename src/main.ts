@@ -1,4 +1,4 @@
-import { setDrawCanvas } from "./setDrawCourse";
+import { setDrawCircuit } from "./setDrawCircuit";
 import { setDrawCircuitPoint } from "./setDrawCircuitPoint";
 import { setupContext } from "./setupContext";
 import { setCircuitOffscreenCtx } from "./getCircuitOffscreenCtx";
@@ -13,7 +13,11 @@ const runCircuitAnimation = (circuitName: string) => {
     setPointsOfCircuit(circuitName);
   const { getCircuitPointImageData } = setCircuitOffscreenCtx(circuitName);
   const { drawCircuitPoint } = setDrawCircuitPoint(mainCanvas);
-  const { drawCourse } = setDrawCanvas(circuitName, mainCtx, mainCanvas.width);
+  const { drawCircuit } = setDrawCircuit(
+    circuitName,
+    mainCtx,
+    mainCanvas.width
+  );
 
   let currentCircuitPoint = 0;
   // todo: replace with requestanimationframe
@@ -29,7 +33,7 @@ const runCircuitAnimation = (circuitName: string) => {
     const circuitPointImageData = getCircuitPointImageData(x, y);
 
     drawCircuitPoint(circuitPointImageData);
-    drawCourse(x, y);
+    drawCircuit(x, y);
   }, 160);
   return () => {
     clearInterval(intervalId);

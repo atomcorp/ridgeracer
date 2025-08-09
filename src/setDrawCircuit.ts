@@ -2,7 +2,7 @@ import { getCircuit } from "./getCircuit";
 
 const circuitSvgSize = 128;
 
-export const setDrawCanvas = (
+export const setDrawCircuit = (
   circuit: string,
   ctx: CanvasRenderingContext2D,
   canvasWidth: number
@@ -16,7 +16,7 @@ export const setDrawCanvas = (
   const dpr = window.devicePixelRatio || 1;
   const multiplier = canvasWidth / dpr / circuitSvgSize;
 
-  const drawCourse = (x: number, y: number) => {
+  const drawCircuit = (x: number, y: number) => {
     const offscreenCanvas = new OffscreenCanvas(canvasWidth, canvasWidth);
 
     const offscreenCtx = offscreenCanvas.getContext(
@@ -43,5 +43,5 @@ export const setDrawCanvas = (
     ctx.drawImage(offscreenCanvas, 0, 0);
   };
 
-  return { drawCourse };
+  return { drawCircuit };
 };

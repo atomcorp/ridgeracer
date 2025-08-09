@@ -8,11 +8,11 @@ export const setCircuitOffscreenCtx = (circuit: string) => {
   const offscreenCtx = offscreenCanvas.getContext("2d", {
     willReadFrequently: true,
   }) as OffscreenCanvasRenderingContext2D;
-  const courseimg = new Image();
-  courseimg.crossOrigin = "anonymous";
-  courseimg.src = src;
-  courseimg.onload = () => {
-    offscreenCtx.drawImage(courseimg, 0, 0);
+  const circuitImg = new Image();
+  circuitImg.crossOrigin = "anonymous";
+  circuitImg.src = src;
+  circuitImg.onload = () => {
+    offscreenCtx.drawImage(circuitImg, 0, 0);
   };
 
   const getCircuitPointImageData = (x: number, y: number) => {

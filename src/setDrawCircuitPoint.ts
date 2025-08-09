@@ -14,11 +14,11 @@ export const setDrawCircuitPoint = (canvas: HTMLCanvasElement) => {
   const offsetY =
     canvas.height / (4 * window.devicePixelRatio) + gridSize * pixelHeight;
 
-  const drawPixel = (x: number, y: number, isCourse: boolean) => {
+  const drawPixel = (x: number, y: number, isTrackPixel: boolean) => {
     ctx.beginPath();
     let newX = offsetX + (x + y) * xDistance * 2;
     let newY = offsetY + (x - y) * yDistance;
-    if (isCourse) {
+    if (isTrackPixel) {
       ctx.fillStyle = "#fd7712";
       newY -= yDistance * 6;
     } else {
@@ -33,14 +33,14 @@ export const setDrawCircuitPoint = (canvas: HTMLCanvasElement) => {
     // const colors = getImageData(x, y);
     for (let indexX = 0; indexX < gridSize; indexX++) {
       for (let indexY = 0; indexY < gridSize; indexY++) {
-        let isCourse = false;
+        let isTrackPixel = false;
         // interesting indexY * 24 + indexX would flip the direction
         const color = colors[indexX * 24 + indexY];
         // console;
         if (color) {
-          isCourse = true;
+          isTrackPixel = true;
         }
-        drawPixel(indexX, indexY, isCourse);
+        drawPixel(indexX, indexY, isTrackPixel);
       }
     }
   };
