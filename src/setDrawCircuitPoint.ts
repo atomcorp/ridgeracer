@@ -8,7 +8,7 @@ export const setDrawCircuitPoint = (canvas: HTMLCanvasElement) => {
 
   // space between pixels
   const xDistance = pixelWidth;
-  const yDistance = pixelWidth + pixelWidth / 10;
+  const yDistance = pixelWidth;
   // where on canvas to start drawing
   const offsetX = pixelWidth;
   const offsetY =

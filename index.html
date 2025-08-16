@@ -8,19 +8,87 @@
     <link rel="stylesheet" href="./index.css" />
   </head>
   <body>
-    <h1>Ridge Racer</h1>
-    <ol>
-      <li><button>01helterskelter</button></li>
-      <li><button>02wonderhill</button></li>
-      <li><button>03edgeoftheearth</button></li>
-      <li><button>04outofblue</button></li>
-      <li><button>05phantommile</button></li>
-      <li><button>06brightestnite</button></li>
-      <li><button>07heavenandhell</button></li>
-      <li><button>08shootinghoops</button></li>
-    </ol>
-    <button>Stop</button>
-    <canvas width="512" height="512" id="minimap"></canvas>
+    <div class="container">
+      <h1>Ridge Racer</h1>
+      <div style="padding: 40px">
+        <div class="circuitButton"></div>
+      </div>
+
+      <canvas width="512" height="512" id="minimap"></canvas>
+      <h2 data-type="name"></h2>
+      <div class="mobile-controls">
+        <button id="prev" aria-label="Previous circuit">Prev</button>
+        <fieldset class="circuit-buttons" id="circuit-select">
+          <legend class="visually-hidden">Select a circuit</legend>
+
+          <input
+            class="circuit-button"
+            checked
+            aria-label="Select Helter Skelter"
+            name="circuit-select"
+            type="radio"
+            id="01helterskelter"
+          />
+          <input
+            class="circuit-button"
+            aria-label="Select Wonder hill"
+            name="circuit-select"
+            type="radio"
+            id="02wonderhill"
+          />
+          <input
+            class="circuit-button"
+            aria-label="Select Edge of the earth"
+            name="circuit-select"
+            type="radio"
+            id="03edgeoftheearth"
+          />
+          <input
+            class="circuit-button"
+            aria-label="Select Out of blue"
+            name="circuit-select"
+            type="radio"
+            id="04outofblue"
+          />
+          <input
+            class="circuit-button"
+            aria-label="Select Phantom mile"
+            name="circuit-select"
+            type="radio"
+            id="05phantommile"
+          />
+          <input
+            class="circuit-button"
+            aria-label="Select Brightest nite"
+            name="circuit-select"
+            type="radio"
+            id="06brightestnite"
+          />
+          <input
+            class="circuit-button"
+            aria-label="Select Heaven and hell"
+            name="circuit-select"
+            type="radio"
+            id="07heavenandhell"
+          />
+          <input
+            class="circuit-button"
+            aria-label="Select Shooting hoops"
+            name="circuit-select"
+            type="radio"
+            id="08shootinghoops"
+          />
+        </fieldset>
+        <button id="next" aria-label="Next circuit">Next</button>
+      </div>
+      <button>Stop</button>
+      <!-- <div class="selector">
+        <div class="selectorSegment selectorSegmentNW"></div>
+        <div class="selectorSegment selectorSegmentNE"></div>
+        <div class="selectorSegment selectorSegmentSW"></div>
+        <div class="selectorSegment selectorSegmentSE"></div>
+      </div> -->
+    </div>
 
     <script type="module" src="/src/main.ts"></script>
   </body>
