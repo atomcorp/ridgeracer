@@ -37,11 +37,11 @@ export const circuitData = {
     date: "15 May 1999, 17:30",
     bgm: [
       {
-        name: "Revlimit Funk (RTS)",
+        name: "Revlimit Funk",
         link: "13-Revlimit+Funk.mp3",
       },
       {
-        name: "Naked Glow (MMM, PRC, DRT)",
+        name: "Naked Glow",
         link: "07-Naked+Glow.mp3",
       },
     ],
@@ -56,19 +56,19 @@ export const circuitData = {
     date: "1 Jul 1999, 20:45",
     bgm: [
       {
-        name: "Burnin' Rubber (MMM)",
+        name: "Burnin' Rubber",
         link: "12-Burnin'+Rubber.mp3",
       },
       {
-        name: "Your Vibe (PRC)",
+        name: "Your Vibe",
         link: "08-Your+Vibe.mp3",
       },
       {
-        name: "Naked Glow (RTS)",
+        name: "Naked Glow",
         link: "07-Naked+Glow.mp3",
       },
       {
-        name: "The Objective (DRT)",
+        name: "The Objective",
         link: "16-The+Objective.mp3",
       },
     ],
@@ -83,11 +83,11 @@ export const circuitData = {
     date: "15 Jul 1999, 06:30",
     bgm: [
       {
-        name: "Quiet Curves (MMM)",
+        name: "Quiet Curves",
         link: "14-Quiet+Curves.mp3",
       },
       {
-        name: "Lucid Rhythms (PRC, RTS, DRT)",
+        name: "Lucid Rhythms",
         link: "09-Lucid+Rhythms.mp3",
       },
     ],
@@ -117,15 +117,15 @@ export const circuitData = {
     date: "22 Oct 1999, 21:45",
     bgm: [
       {
-        name: "Your Vibe (MMM)",
+        name: "Your Vibe",
         link: "08-Your+Vibe.mp3",
       },
       {
-        name: "The Objective (PRC, RTS)",
+        name: "The Objective",
         link: "16-The+Objective.mp3",
       },
       {
-        name: "Revlimit Funk (DRT)",
+        name: "Revlimit Funk",
         link: "13-Revlimit+Funk.mp3",
       },
     ],
@@ -140,11 +140,11 @@ export const circuitData = {
     date: "26 Nov 1999, 15:00",
     bgm: [
       {
-        name: "Move Me (MMM, DRT)",
+        name: "Move Me",
         link: "17-Move+Me.mp3",
       },
       {
-        name: "The Ride (PRC, RTS)",
+        name: "The Ride",
         link: "18-The+Ride.mp3",
       },
     ],

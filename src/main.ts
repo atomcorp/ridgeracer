@@ -18,7 +18,7 @@ const playerEl = document
   .getElementById("player")
   ?.querySelector("audio") as HTMLAudioElement;
 const nowPlayingEl = document.getElementById("now-playing") as HTMLDivElement;
-
+const playerIcon = document.getElementById("player-icon") as HTMLDivElement;
 type State = {
   currentCircuit: (typeof circuitData)[(typeof circuitNames)[number]];
   stopAnimation?: () => void;
@@ -51,22 +51,26 @@ const updateUi = () => {
   circuitDateEl.textContent = `Date: ${state.currentCircuit.date}`;
 
   circuitBgmEl.innerHTML = "BGM: ";
-  state.currentCircuit.bgm.forEach((track) => {
+  state.currentCircuit.bgm.forEach((track, i) => {
     const startSongButton = document.createElement("button");
     startSongButton.dataset.addToPlayer = "true";
     startSongButton.dataset.filename = track.link;
     startSongButton.innerText = track.name;
     startSongButton.classList.add("play-song");
     circuitBgmEl.appendChild(startSongButton);
+    if (i < state.currentCircuit.bgm.length - 1) {
+      const divider = document.createElement("span");
+      divider.textContent = "/";
+      circuitBgmEl.appendChild(divider);
+    }
   });
 };
 
 const updatePlayer = (trackId: string, trackName: string) => {
   playerEl.src = `/assets/${trackId}`;
   playerEl.play();
-  controlsEl.innerHTML = pauseIcon;
-  console.log(trackName);
-  nowPlayingEl.innerText = `Now playing: ${trackName}`;
+  playerIcon.innerHTML = pauseIcon;
+  nowPlayingEl.innerText = `Now playing: \n ${trackName}`;
 };
 
 const runCircuitAnimation = (circuitName: string) => {
@@ -151,16 +155,16 @@ document.addEventListener("click", (e) => {
   }
 });
 
-controlsEl.addEventListener("click", (e) => {
+controlsEl.addEventListener("click", () => {
   const playerEl = document
     .getElementById("player")
     ?.querySelector("audio") as HTMLAudioElement;
   if (playerEl.paused) {
     playerEl.play();
-    controlsEl.innerHTML = pauseIcon;
+    playerIcon.innerHTML = pauseIcon;
   } else {
     playerEl.pause();
-    controlsEl.innerHTML = playIcon;
+    playerIcon.innerHTML = playIcon;
   }
 });
 

@@ -12,37 +12,45 @@
       <canvas width="512" height="512" id="minimap"></canvas>
 
       <header>
-        <h1 class="title">Ridge Racer Type 4</h1>
-        <aside class="credit">
-          <span>by <a href="https://github.com/atomcorp">atomcorp</a></span>
-          <span
-            >music via
-            <a
-              href="https://archive.org/details/r4ridgeracertype4directaudioflac"
-              >Internet Archive</a
-            ></span
-          >
-        </aside>
-        <button id="play-controls" class="player-controls">&#x23F5;</button>
-        <div id="now-playing">Now playing Pearl Blue Soul</div>
-        <figure id="player">
-          <figcaption class="visually-hidden">Ridge Racer Player</figcaption>
-          <audio
-            nocontrols
-            src="/assets/06-Pearl+Blue+Soul.mp3"
-            type="audio/mp3"
-          ></audio>
-        </figure>
+        <div class="title-container">
+          <h1 class="title">Ridge Racer Type 4</h1>
+          <aside class="credit">
+            <span>by <a href="https://github.com/atomcorp">atomcorp</a></span> /
+            <span
+              >music via
+              <a
+                href="https://archive.org/details/r4ridgeracertype4directaudioflac"
+                >Internet Archive</a
+              ></span
+            >
+          </aside>
+        </div>
+        <button id="play-controls" class="player-controls">
+          <div id="player-icon" class="player-icon">&#x23F5;</div>
+          <div id="now-playing">Now playing <br />Pearl Blue Soul</div>
+        </button>
       </header>
+
+      <figure id="player">
+        <figcaption class="visually-hidden">Ridge Racer Player</figcaption>
+        <audio
+          nocontrols
+          src="/assets/06-Pearl+Blue+Soul.mp3"
+          type="audio/mp3"
+        ></audio>
+      </figure>
+
       <div class="circuit-data">
         <h2 data-type="name"></h2>
         <div data-type="laps"></div>
         <div data-type="length"></div>
         <div data-type="date"></div>
-        <div data-type="bgm"></div>
+        <div class="bgm" data-type="bgm"></div>
       </div>
       <div class="mobile-controls">
-        <button id="prev" aria-label="Previous circuit">Prev</button>
+        <button class="prevnext" id="prev" aria-label="Previous circuit">
+          &#x23F4;
+        </button>
         <fieldset class="circuit-buttons" id="circuit-select">
           <legend class="visually-hidden">Select a circuit</legend>
 
@@ -104,7 +112,9 @@
             id="08shootinghoops"
           />
         </fieldset>
-        <button id="next" aria-label="Next circuit">Next</button>
+        <button class="prevnext" id="next" aria-label="Next circuit">
+          &#x23F5;
+        </button>
       </div>
     </div>
 
