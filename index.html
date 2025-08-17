@@ -9,13 +9,38 @@
   </head>
   <body>
     <div class="container">
-      <h1>Ridge Racer</h1>
-      <div style="padding: 40px">
-        <div class="circuitButton"></div>
-      </div>
-
       <canvas width="512" height="512" id="minimap"></canvas>
-      <h2 data-type="name"></h2>
+
+      <header>
+        <h1 class="title">Ridge Racer Type 4</h1>
+        <aside class="credit">
+          <span>by <a href="https://github.com/atomcorp">atomcorp</a></span>
+          <span
+            >music via
+            <a
+              href="https://archive.org/details/r4ridgeracertype4directaudioflac"
+              >Internet Archive</a
+            ></span
+          >
+        </aside>
+        <button id="play-controls" class="player-controls">&#x23F5;</button>
+        <div id="now-playing">Now playing Pearl Blue Soul</div>
+        <figure id="player">
+          <figcaption class="visually-hidden">Ridge Racer Player</figcaption>
+          <audio
+            nocontrols
+            src="/assets/06-Pearl+Blue+Soul.mp3"
+            type="audio/mp3"
+          ></audio>
+        </figure>
+      </header>
+      <div class="circuit-data">
+        <h2 data-type="name"></h2>
+        <div data-type="laps"></div>
+        <div data-type="length"></div>
+        <div data-type="date"></div>
+        <div data-type="bgm"></div>
+      </div>
       <div class="mobile-controls">
         <button id="prev" aria-label="Previous circuit">Prev</button>
         <fieldset class="circuit-buttons" id="circuit-select">
@@ -81,13 +106,6 @@
         </fieldset>
         <button id="next" aria-label="Next circuit">Next</button>
       </div>
-      <button>Stop</button>
-      <!-- <div class="selector">
-        <div class="selectorSegment selectorSegmentNW"></div>
-        <div class="selectorSegment selectorSegmentNE"></div>
-        <div class="selectorSegment selectorSegmentSW"></div>
-        <div class="selectorSegment selectorSegmentSE"></div>
-      </div> -->
     </div>
 
     <script type="module" src="/src/main.ts"></script>

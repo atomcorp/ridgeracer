@@ -5,9 +5,19 @@ import { setCircuitOffscreenCtx } from "./getCircuitOffscreenCtx";
 import { setPointsOfCircuit } from "./setPointsOfCircuit";
 import { circuitData, circuitNames } from "./circuits";
 
+const pauseIcon = "&#x23F8;";
+const playIcon = "&#x23F5;";
+
 const mainCanvas = document.getElementById("minimap") as HTMLCanvasElement;
 // generic - setup context (scale ctx, set canvas width/height)
 const mainCtx = setupContext(mainCanvas);
+const controlsEl = document.getElementById(
+  "play-controls"
+) as HTMLButtonElement;
+const playerEl = document
+  .getElementById("player")
+  ?.querySelector("audio") as HTMLAudioElement;
+const nowPlayingEl = document.getElementById("now-playing") as HTMLDivElement;
 
 type State = {
   currentCircuit: (typeof circuitData)[(typeof circuitNames)[number]];
@@ -20,10 +30,43 @@ const state: State = {
 };
 
 const updateUi = () => {
-  const circuitNameEl = document.querySelector('[data-type="name"]');
-  if (circuitNameEl) {
-    circuitNameEl.textContent = state.currentCircuit.name;
-  }
+  const circuitNameEl = document.querySelector(
+    '[data-type="name"]'
+  ) as HTMLDivElement;
+  const circuitLapsEl = document.querySelector(
+    '[data-type="laps"]'
+  ) as HTMLDivElement;
+  const circuitLengthEl = document.querySelector(
+    '[data-type="length"]'
+  ) as HTMLDivElement;
+  const circuitDateEl = document.querySelector(
+    '[data-type="date"]'
+  ) as HTMLDivElement;
+  const circuitBgmEl = document.querySelector(
+    '[data-type="bgm"]'
+  ) as HTMLDivElement;
+  circuitNameEl.textContent = state.currentCircuit.name;
+  circuitLapsEl.textContent = `Laps ${state.currentCircuit.laps}`;
+  circuitLengthEl.textContent = `Length: ${state.currentCircuit.length} ml`;
+  circuitDateEl.textContent = `Date: ${state.currentCircuit.date}`;
+
+  circuitBgmEl.innerHTML = "BGM: ";
+  state.currentCircuit.bgm.forEach((track) => {
+    const startSongButton = document.createElement("button");
+    startSongButton.dataset.addToPlayer = "true";
+    startSongButton.dataset.filename = track.link;
+    startSongButton.innerText = track.name;
+    startSongButton.classList.add("play-song");
+    circuitBgmEl.appendChild(startSongButton);
+  });
+};
+
+const updatePlayer = (trackId: string, trackName: string) => {
+  playerEl.src = `/assets/${trackId}`;
+  playerEl.play();
+  controlsEl.innerHTML = pauseIcon;
+  console.log(trackName);
+  nowPlayingEl.innerText = `Now playing: ${trackName}`;
 };
 
 const runCircuitAnimation = (circuitName: string) => {
@@ -74,7 +117,8 @@ document.getElementById("circuit-select")?.addEventListener("change", (e) => {
 
 document.addEventListener("click", (e) => {
   const target = e.target as HTMLElement;
-  if (target.tagName === "BUTTON") {
+
+  if (target.id === "next" || target.id === "prev") {
     if (state.stopAnimation) {
       state.stopAnimation();
     }
@@ -101,6 +145,22 @@ document.addEventListener("click", (e) => {
     state.stopAnimation = runCircuitAnimation(state.currentCircuit.id);
     // select the circuit radio button
     document.getElementById(state.currentCircuit.id)?.click();
+  }
+  if (target.dataset?.addToPlayer === "true" && target.dataset?.filename) {
+    updatePlayer(target.dataset?.filename, target.innerText);
+  }
+});
+
+controlsEl.addEventListener("click", (e) => {
+  const playerEl = document
+    .getElementById("player")
+    ?.querySelector("audio") as HTMLAudioElement;
+  if (playerEl.paused) {
+    playerEl.play();
+    controlsEl.innerHTML = pauseIcon;
+  } else {
+    playerEl.pause();
+    controlsEl.innerHTML = playIcon;
   }
 });
 

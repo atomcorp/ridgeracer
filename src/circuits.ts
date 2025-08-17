@@ -21,7 +21,12 @@ export const circuitData = {
     country: "JPN",
     location: "Yokohama, Japan",
     date: "1 May 1999, 11:30",
-    bgm: "Pearl Blue Soul",
+    bgm: [
+      {
+        name: "Pearl Blue Soul",
+        link: "06-Pearl+Blue+Soul.mp3",
+      },
+    ],
   },
   "02wonderhill": {
     id: "02wonderhill",
@@ -30,7 +35,16 @@ export const circuitData = {
     name: "Wonder hill",
     country: "JPN",
     date: "15 May 1999, 17:30",
-    bgm: "Revlimit Funk (RTS) / Naked Glow (MMM, PRC, DRT)",
+    bgm: [
+      {
+        name: "Revlimit Funk (RTS)",
+        link: "13-Revlimit+Funk.mp3",
+      },
+      {
+        name: "Naked Glow (MMM, PRC, DRT)",
+        link: "07-Naked+Glow.mp3",
+      },
+    ],
     location: "Fukuoka, Japan",
   },
   "03edgeoftheearth": {
@@ -40,7 +54,24 @@ export const circuitData = {
     name: "Edge of the earth",
     country: "USA",
     date: "1 Jul 1999, 20:45",
-    bgm: "Burnin' Rubber (MMM) / Your Vibe (PRC) / Naked Glow (RTS) / The Objective (DRT)",
+    bgm: [
+      {
+        name: "Burnin' Rubber (MMM)",
+        link: "12-Burnin'+Rubber.mp3",
+      },
+      {
+        name: "Your Vibe (PRC)",
+        link: "08-Your+Vibe.mp3",
+      },
+      {
+        name: "Naked Glow (RTS)",
+        link: "07-Naked+Glow.mp3",
+      },
+      {
+        name: "The Objective (DRT)",
+        link: "16-The+Objective.mp3",
+      },
+    ],
     location: "New York, USA",
   },
   "04outofblue": {
@@ -50,7 +81,16 @@ export const circuitData = {
     name: "Out of blue",
     country: "JPN",
     date: "15 Jul 1999, 06:30",
-    bgm: "Quiet Curves (MMM) / Lucid Rhythms (PRC, RTS, DRT)",
+    bgm: [
+      {
+        name: "Quiet Curves (MMM)",
+        link: "14-Quiet+Curves.mp3",
+      },
+      {
+        name: "Lucid Rhythms (PRC, RTS, DRT)",
+        link: "09-Lucid+Rhythms.mp3",
+      },
+    ],
     location: "Yokohama, Japan",
   },
   "05phantommile": {
@@ -60,7 +100,12 @@ export const circuitData = {
     name: "Phantom mile",
     country: "JPN",
     date: "24 Sep 1999, 12:00",
-    bgm: "Motor Species",
+    bgm: [
+      {
+        name: "Motor Species",
+        link: "15-Motor+Species.mp3",
+      },
+    ],
     location: "Yokohama, Japan",
   },
   "06brightestnite": {
@@ -70,7 +115,21 @@ export const circuitData = {
     name: "Brightest nite",
     country: "USA",
     date: "22 Oct 1999, 21:45",
-    bgm: "Your Vibe (MMM) / The Objective (PRC, RTS) / Revlimit Funk (DRT)",
+    bgm: [
+      {
+        name: "Your Vibe (MMM)",
+        link: "08-Your+Vibe.mp3",
+      },
+      {
+        name: "The Objective (PRC, RTS)",
+        link: "16-The+Objective.mp3",
+      },
+      {
+        name: "Revlimit Funk (DRT)",
+        link: "13-Revlimit+Funk.mp3",
+      },
+    ],
+    location: "New York, USA",
   },
   "07heavenandhell": {
     id: "07heavenandhell",
@@ -79,7 +138,16 @@ export const circuitData = {
     name: "Heaven and hell",
     country: "JPN",
     date: "26 Nov 1999, 15:00",
-    bgm: "Move Me (MMM, DRT) / The Ride (PRC, RTS)",
+    bgm: [
+      {
+        name: "Move Me (MMM, DRT)",
+        link: "17-Move+Me.mp3",
+      },
+      {
+        name: "The Ride (PRC, RTS)",
+        link: "18-The+Ride.mp3",
+      },
+    ],
     location: "Fukuoka, Japan",
   },
   "08shootinghoops": {
@@ -89,7 +157,12 @@ export const circuitData = {
     name: "Shooting hoops",
     country: "USA",
     date: "31 Dec 1999, 23:45",
-    bgm: "Movin' in Circles",
+    bgm: [
+      {
+        name: "Movin' in Circles",
+        link: "19-Movin'+in+Circles.mp3",
+      },
+    ],
     location: "Los Angeles, USA,",
   },
 } as const;
