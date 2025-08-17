@@ -67,7 +67,7 @@ const updateUi = () => {
 };
 
 const updatePlayer = (trackId: string, trackName: string) => {
-  playerEl.src = `/assets/${trackId}`;
+  playerEl.src = `/${trackId}`;
   playerEl.play();
   playerIcon.innerHTML = pauseIcon;
   nowPlayingEl.innerText = `Now playing: \n ${trackName}`;

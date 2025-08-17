@@ -17,6 +17,10 @@
   }
 }
 
+html {
+  color-scheme: light;
+}
+
 body {
   /* 4. Add accessible line-height */
   line-height: 1.5;
@@ -55,6 +59,15 @@ h6 {
 
 button {
   cursor: pointer;
+  color: inherit;
+}
+
+input {
+  color: inherit;
+}
+
+:root {
+  color-scheme: light dark;
 }
 
 html {
@@ -69,6 +82,7 @@ body {
   font-family: Impact, sans-serif;
   /* font-kerning: ; */
   height: 100%;
+  color: black;
 }
 
 a,
