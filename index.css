@@ -147,7 +147,8 @@ header {
 }
 
 .player-icon {
-  font-size: 2rem;
+  height: 32px;
+  display: block;
 }
 
 .circuit-data {
@@ -229,7 +230,7 @@ header {
   gap: 5px;
   align-items: center;
   &::after {
-    content: "\23F5";
+    content: url("/play-fill.svg");
     font-size: 1.4rem;
     line-height: 1rem;
   }
@@ -247,3 +248,13 @@ header {
   body {
   }
 } */
+
+.prevnext-icon {
+  width: 16px;
+  height: 16px;
+  display: block;
+}
+
+.prev-icon {
+  transform: rotateY(180deg);
+}

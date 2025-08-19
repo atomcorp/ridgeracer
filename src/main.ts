@@ -5,9 +5,6 @@ import { setCircuitOffscreenCtx } from "./getCircuitOffscreenCtx";
 import { setPointsOfCircuit } from "./setPointsOfCircuit";
 import { circuitData, circuitNames } from "./circuits";
 
-const pauseIcon = "&#x23F8;";
-const playIcon = "&#x23F5;";
-
 const mainCanvas = document.getElementById("minimap") as HTMLCanvasElement;
 // generic - setup context (scale ctx, set canvas width/height)
 const mainCtx = setupContext(mainCanvas);
@@ -17,8 +14,9 @@ const controlsEl = document.getElementById(
 const playerEl = document
   .getElementById("player")
   ?.querySelector("audio") as HTMLAudioElement;
+
 const nowPlayingEl = document.getElementById("now-playing") as HTMLDivElement;
-const playerIcon = document.getElementById("player-icon") as HTMLDivElement;
+const playerIcon = document.getElementById("player-icon") as HTMLImageElement;
 type State = {
   currentCircuit: (typeof circuitData)[(typeof circuitNames)[number]];
   stopAnimation?: () => void;
@@ -66,10 +64,10 @@ const updateUi = () => {
   });
 };
 
-const updatePlayer = (trackId: string, trackName: string) => {
+const addTrack = (trackId: string, trackName: string) => {
   playerEl.src = `/${trackId}`;
   playerEl.play();
-  playerIcon.innerHTML = pauseIcon;
+  playerIcon.src = "/pause-fill.svg";
   nowPlayingEl.innerText = `Now playing: \n ${trackName}`;
 };
 
@@ -119,52 +117,53 @@ document.getElementById("circuit-select")?.addEventListener("change", (e) => {
   }
 });
 
+const nextButton = document.getElementById("next") as HTMLButtonElement;
+nextButton.addEventListener("click", () => {
+  if (state.stopAnimation) {
+    state.stopAnimation();
+  }
+  const currentCircuitIndex = circuitNames.findIndex(
+    (id) => id === state.currentCircuit.id
+  );
+  const nextIndex =
+    currentCircuitIndex < circuitNames.length - 1 ? currentCircuitIndex + 1 : 0;
+  state.currentCircuit = circuitData[circuitNames[nextIndex]];
+  state.stopAnimation = runCircuitAnimation(state.currentCircuit.id);
+  // select the circuit radio button
+  document.getElementById(state.currentCircuit.id)?.click();
+});
+
+const prevButton = document.getElementById("prev") as HTMLButtonElement;
+prevButton.addEventListener("click", () => {
+  if (state.stopAnimation) {
+    state.stopAnimation();
+  }
+  const currentCircuitIndex = circuitNames.findIndex(
+    (id) => id === state.currentCircuit.id
+  );
+  const prevIndex =
+    currentCircuitIndex > 0 ? currentCircuitIndex - 1 : circuitNames.length - 1;
+  state.currentCircuit = circuitData[circuitNames[prevIndex]];
+  state.stopAnimation = runCircuitAnimation(state.currentCircuit.id);
+  // select the circuit radio button
+  document.getElementById(state.currentCircuit.id)?.click();
+});
+
 document.addEventListener("click", (e) => {
   const target = e.target as HTMLElement;
 
-  if (target.id === "next" || target.id === "prev") {
-    if (state.stopAnimation) {
-      state.stopAnimation();
-    }
-    if (target.innerText === "Stop") {
-      return;
-    }
-
-    const currentCircuitIndex = circuitNames.findIndex(
-      (id) => id === state.currentCircuit.id
-    );
-    if (target.id === "next") {
-      const nextIndex =
-        currentCircuitIndex < circuitNames.length - 1
-          ? currentCircuitIndex + 1
-          : 0;
-      state.currentCircuit = circuitData[circuitNames[nextIndex]];
-    } else if (target.id === "prev") {
-      const prevIndex =
-        currentCircuitIndex > 0
-          ? currentCircuitIndex - 1
-          : circuitNames.length - 1;
-      state.currentCircuit = circuitData[circuitNames[prevIndex]];
-    }
-    state.stopAnimation = runCircuitAnimation(state.currentCircuit.id);
-    // select the circuit radio button
-    document.getElementById(state.currentCircuit.id)?.click();
-  }
   if (target.dataset?.addToPlayer === "true" && target.dataset?.filename) {
-    updatePlayer(target.dataset?.filename, target.innerText);
+    addTrack(target.dataset?.filename, target.innerText);
   }
 });
 
 controlsEl.addEventListener("click", () => {
-  const playerEl = document
-    .getElementById("player")
-    ?.querySelector("audio") as HTMLAudioElement;
   if (playerEl.paused) {
     playerEl.play();
-    playerIcon.innerHTML = pauseIcon;
+    playerIcon.src = "/pause-fill.svg";
   } else {
     playerEl.pause();
-    playerIcon.innerHTML = playIcon;
+    playerIcon.src = "/play-fill.svg";
   }
 });
 
